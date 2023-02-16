@@ -2,21 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>AMS5.0文档</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
 </head>
 <body>
   <div id="app"></div>
   <script>
     window.$docsify = {
-      name: '',
-      repo: ''
+      auto2top: true,
+      maxAge: 86400000,
+      // basePath: '/docs/',
+      name: 'ams5.0-doc',
+      repo: 'https://github.com/AeolusJack',
+      maxLevel: 5, //最大支持渲染的标题层级
+      subMaxLevel: 3,
+      homepage: 'README.md',
+      coverpage: true,
+      loadSidebar: true,
+      loadNavbar: true,
+      mergeNavbar: true,
+      search: {
+        paths: 'auto',
+        placeholder: '搜索',
+        noData: '找不到结果',
+        //搜索标题的最大层级 1-6
+        depth: 3
+      }
+      // search: {
+      //   noData: {
+      //     '/de-de/': 'Keine Ergebnisse!',
+      //     '/zh-cn/': '没有结果!',
+      //     '/': 'No results!'
+      //   },
+      //   paths: 'auto',
+      //   placeholder: {
+      //     '/de-de/': 'Suche',
+      //     '/zh-cn/': '搜索',
+      //     '/': 'Search'
+      //   },
+      //   pathNamespaces: ['/zh-cn', '/de-de', '/ru-ru', '/es']
+      // } 
     }
   </script>
-  <!-- Docsify v4 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-</body>
-</html>
+  <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+  <script src="//unpkg.com/docsify"></script>
+  <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+<script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<!-- <div id="gitalk-container"></div> -->
+<script>
+ var gitalk = new Gitalk({
+  clientID: 'cb3d7d23e8603295d89a', // GitHub Application Client ID
+  clientSecret: '2a12b8a82b322c1b08242e37857b9befc725d9ab', // GitHub Application Client Secret
+  repo: 'ams5.0-doc',     // 存放评论的仓库
+  owner: 'AeolusJack',          // 仓库的创建者，
+  admin: ['AeolusJack'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+  title: location.hash.match(/#(.*?)([?]|$)/)[1],
+  id: location.hash.match(/#(.*?)([?]|$)/)[1]    // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
+})
+ // 监听URL中hash的变化，如果发现换了一个MD文件，那么刷新页面，解决整个网站使用一个gitalk评论issues的问题。
+ window.onhashchange = function(event){
+      if(event.newURL.split('?')[0] !== event.oldURL .split('?')[0]) {
+        location.reload()
+      }
+    }
+//gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
+</script>
+  </html>
