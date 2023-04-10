@@ -2,9 +2,10 @@
 ## 1.什么东西
 ### ESB
 前置名词解释：   
-soa 网络面向服务架构(Service-Oriented Architecture);服务导向架构;面向服务的架构 网络释义 1. 面向服务架构(Service-Oriented Architecture)   
-SOA 是通过功能组件化、服务化，来实现系统集成、解决信息孤岛，这是其主要目标。而更进一步则是实现更快响应业务的变化、更快推出新的应用系统。与此同时，SOA 还实现了整合资源，资源复用。   
-SOA 服务的设计标准是粗粒度、高重用、灵活、标准。性能则并非首要考虑因素。   
+soa 网络面向服务架构(Service-Oriented Architecture);服务导向架构;面向服务的架构。  
+网络释义：面向服务架构(Service-Oriented Architecture)   
+SOA 是通过功能组件化、服务化，来实现系统集成、解决信息孤岛，这是其主要目标。而更进一步则是实现更快响应业务的变化、更快推出新的应用系统。与此同时，SOA 还实现了整合资源，资源复用。      
+SOA 服务的设计标准是粗粒度、高重用、灵活、标准。性能则并非首要考虑因素。      
 SOA 的两大功能是集成、服务编排(BPEL、BPM)。WF 在 SOA 架构中，实现服务编排的功能。   
 
 ESB 是一个概念,ESB 复杂而模糊，不同产品特性千差万别，ESB 是 SOA 的重要实现手段。ESB 实现 SOA 时，它作为中心、媒介，集成的系统将只与它进行交互。而 ESB 实现与各种系统间的协议转换、数据转换、透明的动态路由功能（基于内容）。   
@@ -12,7 +13,7 @@ IBM 总结了 ESB 的功能，较完整的功能如下：
 
 | **通信** | **服务交互** |
 | --- | --- |
-| 
+
 - 路由
 - 寻址
 - 通信技术、协议和标准（例如 IBM® WebSphere® MQ、HTTP 和 HTTPS）
@@ -20,7 +21,7 @@ IBM 总结了 ESB 的功能，较完整的功能如下：
 - 响应/请求
 - Fire-and-Forget，事件
 - 同步和异步消息传递
- |
+ 
 - 服务接口定义（例如，Web 服务描述语言（Web Services Description Language，WSDL））
 - 支持替代服务实现
 - 通信和集成所需的服务消息传递模型（例如 SOAP 或企业应用程序集成 (EAI) 中间件模型）
@@ -99,11 +100,11 @@ IBM 总结了 ESB 的功能，较完整的功能如下：
 
 
 ### 统一网关
-（以阿里云对于统一网关的实现为例进行解释）
+（以阿里云对于统一网关的实现为例进行解释）   
 阿里云API网关doc：
-[https://help.aliyun.com/document_detail/29464.html](https://help.aliyun.com/document_detail/29464.html)
+[https://help.aliyun.com/document_detail/29464.html](https://help.aliyun.com/document_detail/29464.html)  
 [SOFAStack API 统一网关](https://help.aliyun.com/product/153275.html)   
-阿里云统一网关（Aliyun API Gateway）是阿里云推出的一种高可用、高可扩展、高性能的API管理服务。它提供了API的发布、管理、监控、调用等功能，可以帮助开发者快速搭建和管理API服务。
+阿里云统一网关（Aliyun API Gateway）是阿里云推出的一种高可用、高可扩展、高性能的API管理服务。它提供了API的发布、管理、监控、调用等功能，可以帮助开发者快速搭建和管理API服务。   
 阿里云统一网关的主要特点包括：
 
 1. 高性能：支持大规模并发请求，可以满足高并发场景下的API服务需求。
@@ -150,30 +151,30 @@ ESB作为一种集成技术，可以帮助企业实现混合云和云端数据�
 
 在我个人看来，排除费用，技术复杂性两个维度后，两者最大的区别（还有其他突出异同点，但是两者是有功能重叠部分的）是 ：一个适合用于有数据安全要求，并且存在自建机房，对并发能力要求不高的，内部系统之间数据打通时使用（ESB）；一个适合于有对外暴露接口的需求，对并发能力要求高的，提供给其他个人或者第三方企业（云厂商提供的统一网关）。
 ## 3.达到什么效果
-  概念性的效果描述参见应用场景，这里做几个简单的实际描述。   
-  比如我们本身有一个内部考核机制，对应的有相应系统数据统计，包括人员管理，人员数据获取。   
-  在存在多个系统都需要获取该人员数据来做统计和其他处理时，如果直接调用的话，这个接口其实是无监控，无维护，无管理的状态。   
-  在发生改变或者或者追溯到对应人员时，稍显麻烦，会造成较多的沟通成本等，如果是通过ESB的话，我们针对每个接口有对应的管理人员，对于接口的调用可以控制，可以在ESB中看到对应接口功能等，在后面出现其他系统也需要类似的该接口时，可以直接申请接口使用权限后开箱即用。对于一些网络安全要求的，可以链接高低级别，因为是通过ESB调用，这时候服务调用是处于监控中的，所以已避免了直接调用时的一些不安全因素。   
-  （会产生一定的使用复杂性）对于已有的接口，可以直观的看到，这时候可以通过统合，生成一些综合接口，以快速落地部分业务诉求。   
-   再拿SaaS和混合云来说，混合云需要调用SaaS的接口，如果直接通过连接天目云的话，像是一些接口统计等的功能，或者其他的一些控制等，我们可能就要单独去实现了，但是如果是通过API统一网关或者ESB去调用的话，这些接口其实是被管理的，这里又存在一个问题，如果是使用API统一网关的话，它是计费的，但是实际我们对于一些接口可能并不是收费的，但是我们又想管理和控制，这时候相对来说其他使用ESB更好一点，但是也存在一些问题，具体怎么去选择就要看怎么去权衡了。   
+  &nbsp;&nbsp; &nbsp;&nbsp;概念性的效果描述参见应用场景，这里做几个简单的实际描述。   
+  &nbsp;&nbsp; &nbsp;&nbsp;比如我们本身有一个内部考核机制，对应的有相应系统数据统计，包括人员管理，人员数据获取。   
+  &nbsp;&nbsp; &nbsp;&nbsp;在存在多个系统都需要获取该人员数据来做统计和其他处理时，如果直接调用的话，这个接口其实是无监控，无维护，无管理的状态。   
+  &nbsp;&nbsp; &nbsp;&nbsp;在发生改变或者或者追溯到对应人员时，稍显麻烦，会造成较多的沟通成本等，如果是通过ESB的话，我们针对每个接口有对应的管理人员，对于接口的调用可以控制，可以在ESB中看到对应接口功能等，在后面出现其他系统也需要类似的该接口时，可以直接申请接口使用权限后开箱即用。对于一些网络安全要求的，可以链接高低级别，因为是通过ESB调用，这时候服务调用是处于监控中的，所以已避免了直接调用时的一些不安全因素。   
+  &nbsp;&nbsp; &nbsp;&nbsp;（会产生一定的使用复杂性）对于已有的接口，可以直观的看到，这时候可以通过统合，生成一些综合接口，以快速落地部分业务诉求。   
+   &nbsp;&nbsp; &nbsp;&nbsp;再拿SaaS和混合云来说，混合云需要调用SaaS的接口，如果直接通过连接SaaS的话，像是一些接口统计等的功能，或者其他的一些控制等，我们可能就要单独去实现了，但是如果是通过API统一网关或者ESB去调用的话，这些接口其实是被管理的，这里又存在一个问题，如果是使用API统一网关的话，它是计费的，但是实际我们对于一些接口可能并不是收费的，但是我们又想管理和控制，这时候相对来说其他使用ESB更好一点，但是也存在一些问题，具体怎么去选择就要看怎么去权衡了。   
 
- 对于API统一网关，我们可以通过API统一网关统一对外提供服务,在这里也可控制调用权限等，直接通过配置化来灵活控制API等，对外提供服务的话可以控制流量，费用等，减少二次开发一些功能，像是DDOS攻击等也可通过API统一网关做一层防护。    
- 像是API网关的话，我们可以参见一些云服务厂商的API统一网关，可以充分的看到相应效果：   
+ &nbsp;&nbsp; &nbsp;&nbsp;对于API统一网关，我们可以通过API统一网关统一对外提供服务,在这里也可控制调用权限等，直接通过配置化来灵活控制API等，对外提供服务的话可以控制流量，费用等，减少二次开发一些功能，像是DDOS攻击等也可通过API统一网关做一层防护。    
+ &nbsp;&nbsp; &nbsp;&nbsp;像是API网关的话，我们可以参见一些云服务厂商的API统一网关，可以充分的看到相应效果：   
 （当然，我们自己也可以实现统一网关的功能，但是可能并没有必要去做这一件事。）   
-亚马逊云
+亚马逊云   
 阿里云：[https://help.aliyun.com/document_detail/29464.html](https://help.aliyun.com/document_detail/29464.html) 
 ## 4.落地例子
-  像是ESB的话在一些制造业、金融业等 传统业务结合互联网的发展过程中，由于存在历史遗留系统，和发展迅猛期，出现了比较多的系统，系统直接数据独立，存在孤岛问题（虽然有数仓，但是数仓的能力 不在这里），如果直接接口调用的话，各种外部接口来回调，不利于管理，不利于统计，也不利于发展。     
+  &nbsp;&nbsp; &nbsp;&nbsp;像是ESB的话在一些制造业、金融业等 传统业务结合互联网的发展过程中，由于存在历史遗留系统，和发展迅猛期，出现了比较多的系统，系统直接数据独立，存在孤岛问题（虽然有数仓，但是数仓的能力 不在这里），如果直接接口调用的话，各种外部接口来回调，不利于管理，不利于统计，也不利于发展。     
 
- API统一网关的话，使用也比较多，比较广泛，像是大多数的互联网产品也都会使用，一些SaaS产品对外提供API服务时也会使用，但是有比较高的数据安全要求的话，往往在选择上，不会倾向于用类似于一些云服务厂商提供的服务，因为存在数据泄漏问题（会将其问题放大）。    
+&nbsp;&nbsp; &nbsp;&nbsp; API统一网关的话，使用也比较多，比较广泛，像是大多数的互联网产品也都会使用，一些SaaS产品对外提供API服务时也会使用，但是有比较高的数据安全要求的话，往往在选择上，不会倾向于用类似于一些云服务厂商提供的服务，因为存在数据泄漏问题（会将其问题放大）。    
 ## 5.具体的一些产品，优缺点比较，能力比较
 ### ESB：
 ####  付费产品： RestCloud ESB（国内）
-  其他（国内）：东方通ESB、普元ESB 还有一大堆基于开源mulesoft esb进行包装的ESB   
-   RestCloud **ESB平台**是一个以API为中心的轻量级ESB总线平台。企业级私有化部署，是一个集成的容器，一个集中式的服务总线。  
+  &nbsp;&nbsp; &nbsp;&nbsp;其他（国内）：东方通ESB、普元ESB 还有一大堆基于开源mulesoft esb进行包装的ESB   
+  &nbsp;&nbsp; &nbsp;&nbsp; RestCloud **ESB平台**是一个以API为中心的轻量级ESB总线平台。企业级私有化部署，是一个集成的容器，一个集中式的服务总线。  
 
 一、RestCloud ESB平台的组成   
-RestCloud ESB平台由API网关和ESB服务编排平台组成，API网关负责API的路由和透传，ESB总线平台则负责以API为中心链接各个业务系统进行数据的推送、拉取、事务控制、异常数据告警等能力。
+&nbsp;&nbsp; &nbsp;&nbsp; RestCloud ESB平台由API网关和ESB服务编排平台组成，API网关负责API的路由和透传，ESB总线平台则负责以API为中心链接各个业务系统进行数据的推送、拉取、事务控制、异常数据告警等能力。
 
 二、RestCloud ESB平台的功能
 
@@ -187,11 +188,11 @@ RestCloud ESB平台由API网关和ESB服务编排平台组成，API网关负责A
 基于微服务架构的ESB平台，全Web化，通过拖拉拽进行可视化的统一编排和调度API服务，集中式管理，支持分布式部署运行，可以极大的提升业务API服务的复用率，全面提升前端业务创新能力   
 官网：[http://www.restcloud.cn/restcloud/mycms/index.html](http://www.restcloud.cn/restcloud/mycms/index.html)   
 RestCloud API管理平台   
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/27876642/1680771760874-3a30e5a9-0c23-4342-994a-e6f615d3d08e.png#averageHue=%23e5dfa2&clientId=u51644dcb-2b0d-4&from=paste&height=153&id=u87ec7f24&name=image.png&originHeight=305&originWidth=640&originalType=binary&ratio=2&rotation=0&showTitle=false&size=176454&status=done&style=none&taskId=u62928d00-1a0e-4457-a3b7-471ca195454&title=&width=320)
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a6b43cac705146fbac626cbe7c7a388e~tplv-k3u1fbpfcp-zoom-1.image)
 ESB复杂的服务集成与数据推送：  
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/27876642/1680771794040-1fb36980-345b-4a06-82c0-405e14602310.png#averageHue=%23f5f6f3&clientId=u51644dcb-2b0d-4&from=paste&height=155&id=u98638b5b&name=image.png&originHeight=309&originWidth=640&originalType=binary&ratio=2&rotation=0&showTitle=false&size=130731&status=done&style=none&taskId=ua501830d-fad4-462f-88f9-b23f854d42c&title=&width=320)
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2387909bf5f64443b3dfaac4aecb57fe~tplv-k3u1fbpfcp-zoom-1.image)
 分布式事务支持能力：  
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/27876642/1680771882389-6753d5fe-eb7b-4c65-a841-5cc1e961844b.png#averageHue=%23f2dcd6&clientId=u51644dcb-2b0d-4&from=paste&height=103&id=u30597a43&name=image.png&originHeight=205&originWidth=640&originalType=binary&ratio=2&rotation=0&showTitle=false&size=66218&status=done&style=none&taskId=u932de37d-0c05-48a6-ade6-b7e868fa473&title=&width=320) 
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/805703989bf54979a975f08bc2b0966f~tplv-k3u1fbpfcp-zoom-1.image) 
 ####   开源产品： MuleESB（MuleSoft） 、WSO2 ESB（WSO2）、UltraESB、Apache ServiceMix（Apache）、OpenESB（Sun/Oracle）、JBoss ESB（JBoss）   
    
 
@@ -213,7 +214,7 @@ MuleESB官网
 [https://blog.csdn.net/Programmer_SKT/article/details/106134565](https://blog.csdn.net/Programmer_SKT/article/details/106134565)        
 Mule ESB在github上的托管地址：    
 [https://github.com/mulesoft/mule](https://github.com/mulesoft/mule)   
-其实正常来说，我们期望通过swagger或者其他接口json数据导入，或者手动页面交互创建ESB接口，但是Mule社区版，包括其他一些开源的ESB一般都不会满足我们的一些特定要求的，可以通过开发相应插件或者使用一些现成的插件，来集成和组合出适合自己要求的ESB，Github上也有一些开发的Mule插件。   
+&nbsp;&nbsp; &nbsp;&nbsp; 其实正常来说，我们期望通过swagger或者其他接口json数据导入，或者手动页面交互创建ESB接口，但是Mule社区版，包括其他一些开源的ESB一般都不会满足我们的一些特定要求的，可以通过开发相应插件或者使用一些现成的插件，来集成和组合出适合自己要求的ESB，Github上也有一些开发的Mule插件。   
 可以看以下一篇文章：    
 [https://zhuanlan.zhihu.com/p/194242793](https://zhuanlan.zhihu.com/p/194242793)   
 此处是以ESB架构为核心，SaaS转型过程中，将ESB架构转为微服务架构。   
@@ -245,18 +246,25 @@ Mule ESB在github上的托管地址：
 5. Ambassador：Ambassador是一个开源的、云原生的API网关，支持多种协议和数据格式，并提供了一系列安全、性能和分析功能。
 
   
-   kong  的GitHub托管地址（**GitHub 34.5k star**）  [https://github.com/Kong/kong](https://github.com/Kong/kong) 
-    开发语言lua脚本语言占比比较高：
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/27876642/1680851844100-d1d5ede7-f18d-4a55-87d7-209e0effb87f.png#averageHue=%23fcfdfa&clientId=u06ea6b37-4b17-4&from=paste&height=160&id=u49a3a899&name=image.png&originHeight=320&originWidth=666&originalType=binary&ratio=2&rotation=0&showTitle=false&size=67389&status=done&style=none&taskId=u5a61cee3-b3d5-4eda-8185-ade5eedd57c&title=&width=333)
+   kong  的GitHub托管地址（**GitHub 34.5k star**）  [https://github.com/Kong/kong](https://github.com/Kong/kong)   
+   
+    开发语言lua脚本语言占比比较高：  
+    
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fdb255b423274732825b638999e1c012~tplv-k3u1fbpfcp-zoom-1.image)
    Tyk 的GitHub托管地址（**GitHub 8.3k star**）：[https://github.com/TykTechnologies/tyk](https://github.com/TykTechnologies/tyk)
-     开发语言go语言占比比较高：
-         ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27876642/1680852023962-6f6debfd-f42d-4f67-8b35-8533bc7c2d79.png#averageHue=%23fcfcf8&clientId=u06ea6b37-4b17-4&from=paste&height=169&id=u4c297655&name=image.png&originHeight=338&originWidth=762&originalType=binary&ratio=2&rotation=0&showTitle=false&size=72046&status=done&style=none&taskId=u9e012c65-ec7a-40ed-bf3d-8fbde887dfa&title=&width=381) 
-  apiman的GitHub托管地址（**GitHub 743 star**）： [https://github.com/apiman/apiman](https://github.com/apiman/apiman)
-    开发语言java占比比较高：
-    ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27876642/1680852249740-b49a4a2c-9eae-4db2-bf03-ef6bb028a4cc.png#averageHue=%23e6d9c4&clientId=u06ea6b37-4b17-4&from=paste&height=156&id=u48e424f0&name=image.png&originHeight=312&originWidth=660&originalType=binary&ratio=2&rotation=0&showTitle=false&size=68920&status=done&style=none&taskId=u1fb8dc51-9054-47fb-8dc2-6d1c539aa88&title=&width=330)
+   
+   开发语言go语言占比比较高：    
+     
+   ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ad863e8d1a6b445e9e4bc80f5318ae44~tplv-k3u1fbpfcp-zoom-1.image) 
+  apiman的GitHub托管地址（**GitHub 743 star**）： [https://github.com/apiman/apiman](https://github.com/apiman/apiman)   
+  
+  
+   开发语言java占比比较高：   
+    
+ ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06c0d52d261b4ad88882f5fd7ed8b5a7~tplv-k3u1fbpfcp-zoom-1.image)
    WSO2 API Manager 的GitHub托管地址（**GitHub 690 star）**： [https://github.com/wso2/product-apim](https://github.com/wso2/product-apim)
      开发语言java占比比价高：
-     ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27876642/1680852302742-bb70546c-fe12-4767-bf38-fbd2761f896c.png#averageHue=%23e3d4be&clientId=u06ea6b37-4b17-4&from=paste&height=168&id=ua8cecced&name=image.png&originHeight=336&originWidth=634&originalType=binary&ratio=2&rotation=0&showTitle=false&size=69456&status=done&style=none&taskId=ua2322626-1a40-4c0a-b23b-1b0d1633e0b&title=&width=317) 
+     ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/937f6a616e8d45e18682bae4fe9bee46~tplv-k3u1fbpfcp-zoom-1.image) 
 ## 7.API统一网关和ESB的部分共同点
 随着系统的演进，API统一网关越来越偏向ESB的一些功能。
 
@@ -268,6 +276,8 @@ Mule ESB在github上的托管地址：
 | 安全性和认证 | 提供身份验证和授权功能，保护数据和服务不受攻击和恶意行为的影响 | 提供身份验证和授权功能，保护数据和服务不受攻击和恶意行为的影响 |
 | 监控和管理 | 提供实时性能指标和错误日志，提供管理控制台和API | 提供实时性能指标和错误日志，提供管理控制台和API |
 
-API统一网关和ESB在很多方面都具有相似的功能，但是它们的设计目的和重点略有不同。API统一网关更加专注于提供API接口和管理功能，而ESB则更加注重在多个应用程序和服务之间提供数据交换和转换的功能。
+   &nbsp;&nbsp; &nbsp;&nbsp;API统一网关和ESB在很多方面都具有相似的功能，但是它们的设计目的和重点略有不同。API统一网关更加专注于提供API接口和管理功能，而ESB则更加注重在多个应用程序和服务之间提供数据交换和转换的功能。
 其实ESB本身就是一个比较模糊的概念，并不是说有个定性的标志，现在很多的功能和侧重点一些商业ESB软件都已经覆盖到了，从功能上来看比大多数API统一网关都要更全面，而API统一网关也逐渐发展的偏ESB的许多功能。
 是否逐渐会互相替换和融合呢？
+
+***本文正在参加[「金石计划」](https://juejin.cn/post/7207698564641996856/ "https://juejin.cn/post/7207698564641996856/")***
